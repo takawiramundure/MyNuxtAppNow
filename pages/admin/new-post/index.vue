@@ -7,8 +7,8 @@
 </template>
 
 <script>
-import axios from "axios";
-import AdminPostForm from "@/components/Admin/AdminPostForm";
+import axios from "axios"
+import AdminPostForm from "@/components/Admin/AdminPostForm"
 
 export default {
   layout: "admin",
@@ -17,9 +17,10 @@ export default {
   },
   methods: {
     onSubmitted(postData) {
-      this.$store.dispatch("addPost", postData).then(() => {
-        this.$router.push("/admin");
-      });
+      this.$store.dispatch("addPost", postData)
+        .then(() => {
+          this.$router.push("/admin")
+      })
     }
   }
 };
