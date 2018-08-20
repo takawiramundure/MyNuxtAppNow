@@ -43,8 +43,13 @@ module.exports = {
   ** Nuxt.js modules
   */
   modules: [
+    '@nuxtjs/axios',
   ],
-
+  axios: {
+    // proxyHeaders: false
+    baseURL: process.env.BASE_URL || 'https://mynuxtapp-7b534.firebaseio.com',
+    credentials: false
+  },
   /*
   ** Build configuration
   */
