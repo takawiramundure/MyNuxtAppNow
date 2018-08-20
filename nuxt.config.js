@@ -66,7 +66,8 @@ module.exports = {
   **  The dev settings 
   */
   env: {
-    baseUrl: process.env.BASE_URL || 'https://mynuxtapp-7b534.firebaseio.com'
+    baseUrl: process.env.BASE_URL || 'https://mynuxtapp-7b534.firebaseio.com',
+    fbAPIKey: 'AIzaSyDAxOqjqvgDdsTiTdo_zD9G20VY4CY6Ow0'
   },
 
   // page transitions for nuxt
