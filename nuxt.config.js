@@ -28,12 +28,14 @@ module.exports = {
   ** Global CSS
   */
   css: [
+    '~assets/styles/main.css'
   ],
 
   /*
   ** Plugins to load before mounting the App
   */
   plugins: [
+    '~plugins/core-components.js'
   ],
 
   /*
@@ -59,6 +61,12 @@ module.exports = {
   */
   env: {
     baseUrl: process.env.BASE_URL || 'https://mynuxtapp-7b534.firebaseio.com'
+  },
+
+  // page transitions for nuxt
+  transition: {
+    name: 'fade',
+    mode: 'out-in'
   }
 
 }
