@@ -1,25 +1,25 @@
 <template>
   <div class="admin-new-post-page">
     <section class="new-post-form">
-      <AdminPostForm @submit="onSubmitted"/>
+      <AdminPostForm @submit="onSubmitted" />
     </section>
   </div>
 </template>
 
 <script>
+import axios from "axios";
 import AdminPostForm from "@/components/Admin/AdminPostForm";
-import axios from "axios"
 
 export default {
-  layout: 'admin',
+  layout: "admin",
   components: {
     AdminPostForm
   },
   methods: {
     onSubmitted(postData) {
-      axios.post('https://mynuxtapp-7b534.firebaseio.com/posts.json', postData)
-        .then(result => console.log(result))
-        .catch(e => console.log(e))
+      this.$store.dispatch("addPost", postData).then(() => {
+        this.$router.push("/admin");
+      });
     }
   }
 };
@@ -37,4 +37,3 @@ export default {
   }
 }
 </style>
-
