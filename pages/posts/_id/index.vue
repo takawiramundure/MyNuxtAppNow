@@ -19,15 +19,18 @@ import Axios from "axios"
 
 export default {
   asyncData(context) {
-    return Axios.get('https://mynuxtapp-7b534.firebaseio.com/posts/' + context.params.id + '.json' )
+    return Axios.get( process.env.baseUrl + '/posts/' + context.params.id + '.json' )
       .then(res =>{
          return {
            loadedPost: res.data
          }
       })
       .catch(e => context.error(e))
+  },
+  head: {
+    title: 'A Blog Post'
   }
-};
+}
 </script>
 
 

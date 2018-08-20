@@ -17,8 +17,7 @@ export default {
   },
   asyncData(context) {
     return axios
-      .get(
-        "https://mynuxtapp-7b534.firebaseio.com//posts/" +
+      .get( process.env.baseUrl + "/posts/" +
           context.params.postId +
           ".json"
       )

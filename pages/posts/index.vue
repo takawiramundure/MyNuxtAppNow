@@ -16,7 +16,7 @@ export default {
       return this.$store.getters.loadedPosts
     }
   }
-};
+}
 </script>
 
 

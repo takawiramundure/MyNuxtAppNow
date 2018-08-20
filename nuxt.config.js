@@ -4,7 +4,7 @@ module.exports = {
   mode: 'universal',
 
   /*
-  ** Headers of the page
+  ** Headers of the page and SEO pages vue meta
   */
   head: {
     title: pkg.name,
@@ -20,7 +20,7 @@ module.exports = {
   },
 
   /*
-  ** Customize the progress-bar color
+  ** Customize the top progress-bar color
   */
   loading: { color: '#3B8070' },
 
@@ -52,5 +52,13 @@ module.exports = {
     extend(config, ctx) {
 
     }
+  },
+
+  /*
+  **  The dev settings 
+  */
+  env: {
+    baseUrl: process.env.BASE_URL || 'https://mynuxtapp-7b534.firebaseio.com'
   }
+
 }
