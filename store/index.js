@@ -22,6 +22,11 @@ const createStore = () => {
       },
       setToken(state, token){
         state.token = token
+      },
+      //add mutation that clears the token after it expires in firebase
+      clearToken(state) {
+        //set token to null to remove its instance
+        state.token = null
       }
     },
     actions: {
@@ -77,10 +82,17 @@ const createStore = () => {
           returnSecureToken: true
         })
         .then(result => {
+          //set the token for the authenticated user
           vuexContext.commit('setToken', result.idToken)
+          vuexContext.dispatch('setLogoutTimer', result.expiresIn * 1000)
         })
-        .catch(e => console.log(e.response));
-        
+        .catch(e => console.log(e.response))
+      },
+      //set the duration of how long it will expire
+      setLogoutTimer(vuexContext, duration){
+        setTimeout( () =>{
+          vuexContext.commit('clearToken')
+        }, duration)
       }
     },
     getters: {
