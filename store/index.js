@@ -89,21 +89,16 @@ const createStore = () => {
           //store the token for future use
           localStorage.setItem('token', result.idToken)
           //store the expiry locally as well
-          localStorage.setItem('tokenExpiration', new Date().getTime() + result.expiresIn * 1000)
+          localStorage.setItem('tokenExpiration', new Date().getTime() + Number.parseInt(result.expiresIn) * 1000)
           //dispatch the function to set and invalidate the token
-          vuexContext.dispatch('setLogoutTimer', result.expiresIn * 1000)
+          // vuexContext.dispatch('setLogoutTimer', result.expiresIn * 1000)
            //set cookie attribute
           Cookie.set('jwt', result.idToken)
-          Cookie.set('expirationDate', new Date().getTime() + result.expiresIn * 1000)
+          Cookie.set('expirationDate', new Date().getTime() + Number.parseInt(result.expiresIn) * 1000)
         })
         .catch(e => console.log(e.response))
       },
-      //set the duration of how long it will expire
-      setLogoutTimer(vuexContext, duration){
-        setTimeout( () =>{
-          vuexContext.commit('clearToken')
-        }, duration)
-      },
+      
       initAuth(vuexContext, req) {
         let token
         let expirationDate
@@ -126,14 +121,23 @@ const createStore = () => {
         }else{
           token = localStorage.getItem('token')
           expirationDate = localStorage.getItem('tokenExpiration')
-       
-          if (new Date().getTime() > +expirationDate || !token) {
+        }
+        if (new Date().getTime() > +expirationDate || !token) {
+          console.log('No token or invalid token')
+          vuexContext.dispatch('logout')
           return
-          }
         }
         
-        vuexContext.dispatch('setLogoutTimer', +expirationDate - new Date().getTime())
+        // vuexContext.dispatch('setLogoutTimer', +expirationDate - new Date().getTime())
         vuexContext.commit('setToken', token)
+      },
+      //log a user out
+      logout(vuexContext) {
+        vuexContext.commit('clearToken')
+        Cookie.remove('jwt')
+        Cookie.remove('expirationDate')
+        localStorage.removeItem('token')
+        localStorage.removeItem('tokenExpiration')
       }
     },
     getters: {
